@@ -1,21 +1,14 @@
 trigger:
 - main
- 
+
 pool:
   vmImage: ubuntu-latest
- 
-jobs:
-- job: Step1
-  displayName: 'Job 1: Run a one-line script'
-  steps:
-  - script: echo Hello, world!
-    displayName: 'Run a one-line script'
- 
-- job: Step2
-  dependsOn: Step1
-  displayName: 'Job 2: Run a multi-line script'
-  steps:
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: 3.x
+      addToPath: true
   - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-    displayName: 'Run a multi-line script'
+      python hello.py
+    displayName: Run hello.py
